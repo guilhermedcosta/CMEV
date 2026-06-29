@@ -1,0 +1,10 @@
+São as páginas feitas em Handlebars.
+
+Exemplo:
+
+views/
+    home.handlebars
+    filmes.handlebars
+    cadastrar.handlebars
+
+Aqui ficam somente o HTML e as expressões do Handlebars.

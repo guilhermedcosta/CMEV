@@ -1,0 +1,27 @@
+{
+  "name": "cmev",
+  "version": "1.0.0",
+  "description": "PP2 Com Havana Alves",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermedcosta/CMEV.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/guilhermedcosta/CMEV/issues"
+  },
+  "homepage": "https://github.com/guilhermedcosta/CMEV#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-handlebars": "^9.0.1",
+    "sequelize": "^6.37.8",
+    "sqlite3": "^6.0.1"
+  }
+}

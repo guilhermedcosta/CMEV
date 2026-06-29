@@ -1,0 +1,5 @@
+Contém configurações do projeto.
+
+Exemplo:
+
+db.js → faz a conexão com o banco SQLite usando o Sequelize.

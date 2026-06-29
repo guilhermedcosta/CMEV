@@ -1,0 +1,16 @@
+Guarda as tabelas do banco (Models).
+
+Exemplo:
+
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
+
+const Filme = sequelize.define('Filme', {
+    nome: DataTypes.STRING,
+    genero: DataTypes.STRING,
+    ano: DataTypes.INTEGER
+});
+
+module.exports = Filme;
+
+Cada model representa uma tabela do banco.
