@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}}</title>
+</head>
+<body>
+  <h1>{{title}}</h1>
+  <a href="/">Voltar</a>
+
+  <section>
+    <h2>Lista de materiais</h2>
+    {{#if materiais.length}}
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Marca</th>
+            <th>Categoria</th>
+            <th>Código do Item</th>
+            <th>NCM</th>
+            <th>Preço</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each materiais}}
+            <tr>
+              <td>{{this.nome}}</td>
+              <td>{{this.marca}}</td>
+              <td>{{this.categoria}}</td>
+              <td>{{this.cod_item}}</td>
+              <td>{{this.ncm}}</td>
+              <td>{{this.preco}}</td>
+              <td>
+                <form action="/materiais/{{this.id}}/excluir" method="post" style="display:inline;">
+                  <button type="submit">Excluir</button>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <p>Nenhum material cadastrado.</p>
+    {{/if}}
+  </section>
+</body>
+</html>
