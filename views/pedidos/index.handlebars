@@ -1,0 +1,43 @@
+<h1>Pedidos</h1>
+
+<p>
+
+<a href="/pedidos/novo">
+
+<button>Novo Pedido</button>
+
+</a>
+
+</p>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+
+<th>Setor</th>
+
+<th>Material</th>
+
+<th>Quantidade</th>
+
+</tr>
+
+{{#each pedidos}}
+
+<tr>
+
+<td>{{this.id}}</td>
+
+<td>{{this.setor}}</td>
+
+<td>{{this.material}}</td>
+
+<td>{{this.quantidade}}</td>
+
+</tr>
+
+{{/each}}
+
+</table>
