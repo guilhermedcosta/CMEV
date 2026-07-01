@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto</title>
+</head>
+<body>
+    <main>
+        <div>
+            <h3>Cadastrar Novo Material para o Estoque</h3>
+
+            <form action="/produtos/criar" method="POST">
+                <div>
+                    <label>Código do Item</label>
+                    <input type="text" name="cod_item" maxlength="6" placeholder="Ex: 050887" required>
+                </div>
+
+                <div>
+                    <label>Nome do Produto</label>
+                    <input type="text" name="nome_produto" placeholder="Ex: Caderno Universitário" required>
+                </div>
+
+                <div>
+                    <label>Marca</label>
+                    <input type="text" name="marca" placeholder="Ex: Bic" required>
+                </div>
+
+                <div>
+                    <label>Categoria</label>
+                    <input type="text" name="categoria" placeholder="Ex: Cadernos e blocos" required>
+                </div>
+
+                <div>
+                    <div>
+                        <label>Quantidade Atual</label>
+                        <input type="number" name="quantidade_atual" min="0" value="0" required>
+                    </div>
+                    <div>
+                        <label>Preço</label>
+                        <input type="number" name="preco" step="0.01" min="0" placeholder="Ex: 15.90" required>
+                    </div>
+                </div>
+
+                <div>
+                    <a href="/">Voltar</a>
+                    <button type="submit">Salvar no Estoque</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
