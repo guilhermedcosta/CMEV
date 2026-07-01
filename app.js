@@ -1,40 +1,50 @@
+//Arquivo principal.
+//Configura Express, Handlebars, Sequelize e inicia o servidor.
+
 const express = require('express');
 const exphbs = require('express-handlebars');
-
-const sequelize = require('./config/conn');
-
-const pedidoRoutes = require('./routes/pedidos');
+const sequelize = require('./db/conn');
 
 const app = express();
 
+// Configuração para receber dados de formulários e JSON
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.json());
 
+// Arquivos estáticos
 app.use(express.static('public'));
 
-app.engine('handlebars', exphbs.engine());
+// Configuração do Handlebars
+app.engine(
+  'handlebars',
+  exphbs.engine({
+    defaultLayout: 'main',
+  })
+);
 
 app.set('view engine', 'handlebars');
 
-app.use(pedidoRoutes);
-
-app.get('/', (req,res)=>{
-
-    res.render('home');
-
+// Rotas
+app.get('/', (req, res) => {
+  res.render('home');
 });
 
-sequelize.sync().then(()=>{
-
-    app.listen(3000,()=>{
-
-        console.log('Servidor rodando!');
-
+// Conexão com o banco e inicialização do servidor
+sequelize
+  .sync()
+  .then(() => {
+    app.listen(3000, () => {
+      console.log('Servidor rodando em http://localhost:3000');
     });
 
-}).catch(err=>{
+        })
+    .catch(err => {
+      console.log(err);
+    });
+    
+    app.listen(3000, () => {
+      console.log('Servidor rodando em http://localhost:3000');
+    });
 
-    console.log(err);
-
-});
+    
+app.engine('handlebars', exphbs.engine({defaultLayout: false}));
