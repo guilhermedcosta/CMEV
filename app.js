@@ -36,15 +36,8 @@ sequelize
     app.listen(3000, () => {
       console.log('Servidor rodando em http://localhost:3000');
     });
-
-        })
-    .catch(err => {
-      console.log(err);
-    });
-    
-    app.listen(3000, () => {
-      console.log('Servidor rodando em http://localhost:3000');
-    });
-
-    
+  })
+  .catch((err) => {
+    console.error('Erro ao conectar com o banco de dados:', err);
+  });
 app.engine('handlebars', exphbs.engine({defaultLayout: false}));
