@@ -3,8 +3,7 @@
 
 const express = require('express');
 const exphbs = require('express-handlebars');
-const sequelize = require('./db/conn');
-
+const conn = require('./config/conn');
 const app = express();
 
 // Configuração para receber dados de formulários e JSON
@@ -18,7 +17,7 @@ app.use(express.static('public'));
 app.engine(
   'handlebars',
   exphbs.engine({
-    defaultLayout: 'main',
+    defaultLayout: false,
   })
 );
 
@@ -39,5 +38,4 @@ sequelize
   })
   .catch((err) => {
     console.error('Erro ao conectar com o banco de dados:', err);
-  });
-app.engine('handlebars', exphbs.engine({defaultLayout: false}));
+});
