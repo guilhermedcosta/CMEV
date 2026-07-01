@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque do Setor</title>
+</head>
+<body>
+    <main>
+        <h2>Estoque do Setor</h2>
+        <a href="/produtos/novo">Cadastrar material para o estoque</a>
+
+        <br><br> <table border="1"> <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome do Produto</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th>Qtd. Atual</th>
+                    <th>Preço (R$)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each produtos}}
+                <tr>
+                    <td>{{this.cod_item}}</td>
+                    <td><strong>{{this.nome_produto}}</strong></td>
+                    <td>{{this.marca}}</td>
+                    <td>{{this.categoria}}</td>
+                    <td>{{this.quantidade_atual}}</td>
+                    <td>{{this.preco}}</td>
+                    <td>
+                        <a href="/produtos/editar/{{this.id}}">Editar</a>
+                        <a href="/produtos/excluir/{{this.id}}" onclick="return confirm('Deseja excluir este item?')">Excluir</a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="7">Nenhum material cadastrado no estoque.</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
