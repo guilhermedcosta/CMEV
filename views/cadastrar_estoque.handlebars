@@ -1,0 +1,39 @@
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Estoque do Setor</h2>
+    <a href="/produtos/novo" class="btn btn-success">Cadastrar material para o estoque</a>
+</div>
+
+<table class="table table-striped table-bordered bg-white">
+    <thead class="table-dark">
+        <tr>
+            <th>Código</th>
+            <th>Nome do Produto</th>
+            <th>Marca</th>
+            <th>Categoria</th>
+            <th>Qtd. Atual</th>
+            <th>Preço (R$)</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each produtos}}
+        <tr>
+            <td>{{this.cod_item}}</td>
+            <td><strong>{{this.nome_produto}}</strong></td>
+            <td>{{this.marca}}</td>
+            <td>{{this.categoria}}</td>
+            <td>{{this.quantidade_atual}}</td>
+            <td>{{this.preco}}</td>
+            <td>
+                <a href="/produtos/editar/{{this.id}}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/produtos/excluir/{{this.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir este item?')">Excluir</a>
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="7" class="text-center text-muted">Nenhum material cadastrado no estoque.</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
