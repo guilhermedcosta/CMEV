@@ -6,24 +6,57 @@
     <title>Pedidos</title>
 </head>
 <body>
-    <table>
-      <tr>
-        <th>Cod. item</th>
-        <th>Setor</th>
-        <th>Material</th>
-        <th>Quantidade</th>
-      </tr>
 
-      {{#each pedidos}}
+    <h1>Lista de Pedidos</h1>
 
-      <tr>
+    <a href="/pedidos/novo">
+        Novo Pedido
+    </a>
 
-        <td>{{this.cod_item}}</td>
-        <td>{{this.setor}}</td>
-        <td>{{this.material}}</td>
-        <td>{{this.quantidade}}</td>
-      </tr>
-      {{/each}}
+    <br><br>
+
+    <table border="1">
+
+        <tr>
+            <th>Cod. item</th>
+            <th>Setor</th>
+            <th>Material</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+        </tr>
+
+        {{#each pedidos}}
+
+        <tr>
+
+            <td>{{this.cod_item}}</td>
+            <td>{{this.setor}}</td>
+            <td>{{this.material}}</td>
+            <td>{{this.quantidade}}</td>
+
+            <td>
+
+                <a href="/pedidos/editar/{{this.cod_item}}">
+                    <button>Editar</button>
+                </a>
+
+                <form
+                    action="/pedidos/deletar/{{this.cod_item}}"
+                    method="POST"
+                    style="display:inline;"
+                >
+                    <button type="submit">
+                        Excluir
+                    </button>
+                </form>
+
+            </td>
+
+        </tr>
+
+        {{/each}}
+
     </table>
+
 </body>
 </html>

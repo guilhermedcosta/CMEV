@@ -2,15 +2,49 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Pedido</title>
-</head>
-<body>
+
     <h1>Editar Pedido</h1>
-    <form>
-    <p>
-    Essa tela será usada para editar um pedido.
-    </p>
-    </form>
-</body>
-</html>
+
+<form action="/pedidos/editar/{{pedido.cod_item}}" method="POST">
+
+    <label for="setor">Setor</label>
+    <br>
+    <input
+        type="text"
+        id="setor"
+        name="setor"
+        value="{{pedido.setor}}"
+        required
+    >
+
+    <br><br>
+
+    <label for="material">Material</label>
+    <br>
+    <input
+        type="text"
+        id="material"
+        name="material"
+        value="{{pedido.material}}"
+        required
+    >
+
+    <br><br>
+
+    <label for="quantidade">Quantidade</label>
+    <br>
+    <input
+        type="number"
+        id="quantidade"
+        name="quantidade"
+        value="{{pedido.quantidade}}"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Atualizar Pedido
+    </button>
+
+</form>
