@@ -1,44 +1,52 @@
-<h1>Novo Pedido</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Pedido</title>
+</head>
+<body>
 
-<form action="/pedidos" method="POST">
+    <h1>Novo Pedido</h1>
 
-<label>Setor</label>
+    <form action="/pedidos" method="POST">
 
-<br>
+        <label for="setor">Setor</label>
+        <br>
+        <input
+            type="text"
+            id="setor"
+            name="setor"
+            required
+        >
+        <br><br>
 
-<input
-type="text"
-name="setor"
-required>
+        <label for="material">Material</label>
+        <br>
+        <input
+            type="text"
+            id="material"
+            name="material"
+            required
+        >
+        <br><br>
 
-<br><br>
+        <label for="quantidade">Quantidade</label>
+        <br>
+        <input
+            type="number"
+            id="quantidade"
+            name="quantidade"
+            required
+            min="1"
+        >
+        <br><br>
 
-<label>Material</label>
+        <button type="submit">
+            Salvar Pedido
+        </button>
 
-<br>
+    </form>
 
-<input
-type="text"
-name="material"
-required>
-
-<br><br>
-
-<label>Quantidade</label>
-
-<br>
-
-<input
-type="number"
-name="quantidade"
-required>
-
-<br><br>
-
-<button type="submit">
-
-Salvar Pedido
-
-</button>
-
-</form>
+</body>
+</html>
