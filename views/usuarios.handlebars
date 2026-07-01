@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários</title>
+</head>
+<body>
+    <h1>Usuários</h1>
+
+<table border="1">
+
+<tr>
+    <th>CPF</th>
+    <th>Ações</th>
+</tr>
+
+{{#each usuarios}}
+
+<tr>
+
+    <td>{{cpf}}</td>
+
+    <td>
+
+        <a href="/editar/{{id}}">Editar</a>
+
+        <a href="/deletar/{{id}}">Excluir</a>
+
+    </td>
+
+</tr>
+
+{{/each}}
+
+</table>
+
+<br>
+
+<a href="/">Novo Cadastro</a>
+</body>
+</html>
