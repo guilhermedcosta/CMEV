@@ -3,7 +3,7 @@
 
 const express = require('express');
 const exphbs = require('express-handlebars');
-const conn = require('./config/conn');
+const conn = require('./config/database');
 const app = express();
 const pedidosRoutes = require('./routes/pedidos');
 
