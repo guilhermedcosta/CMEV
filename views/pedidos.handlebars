@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos de Requisição</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <main>
+        <h1>Pedidos de Requisição</h1>
+        <a href="/pedidos/novo">Novo Pedido</a>
+        <br><br>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Setor</th>
+                    <th>Material</th>
+                    <th>Quantidade</th>
+                    <th>Categoria</th>
+                    <th>Marca</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each pedidos}}
+                <tr>
+                    <td>{{this.cod_item}}</td>
+                    <td>{{this.setor}}</td>
+                    <td>{{this.material}}</td>
+                    <td>{{this.quantidade}}</td>
+                    <td>{{this.categoria}}</td>
+                    <td>{{this.marca}}</td>
+                    <td>
+                        <a href="/pedidos/editar/{{this.id}}">Editar</a>
+                        <a href="/pedidos/excluir/{{this.id}}" onclick="return confirm('Deseja excluir este pedido?')">Excluir</a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="7">Nenhum pedido cadastrado.</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
