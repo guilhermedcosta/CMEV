@@ -17,7 +17,7 @@ router.get('/produtos/novo', (req, res) => {
 router.post('/produtos/criar', async (req, res) => {
     try {
         await Produto.create(req.body);
-        res.redirect('/');
+        res.redirect('/produtos');
     } catch (err) {
         console.error('Erro ao criar produto:', err);
         res.render('novo_produto', {
@@ -36,13 +36,13 @@ router.get('/produtos/editar/:id', async (req, res) => {
 
 router.post('/produtos/atualizar', async (req, res) => {
     await Produto.update(req.body, { where: { id: req.body.id } });
-    res.redirect('/');
+    res.redirect('/produtos');
 });
 
 
 router.get('/produtos/excluir/:id', async (req, res) => {
     await Produto.destroy({ where: { id: req.params.id } });
-    res.redirect('/');
+    res.redirect('/produtos');
 });
 
 module.exports = router;
