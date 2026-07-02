@@ -2,49 +2,46 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <title>Editar Pedido</title>
+</head>
+<body>
 
     <h1>Editar Pedido</h1>
 
-<form action="/pedidos/editar/{{pedido.cod_item}}" method="POST">
+    <form action="/pedidos/atualizar" method="POST">
 
-    <label for="setor">Setor</label>
+        <input type="hidden" name="cod_item" value="{{pedido.cod_item}}">
+
+        <label for="setor">Setor</label>
+        <br>
+        <input type="text" id="setor" name="setor" value="{{pedido.setor}}" required>
+        <br><br>
+
+        <label for="material">Material</label>
+        <br>
+        <input type="text" id="material" name="material" value="{{pedido.material}}" required>
+        <br><br>
+
+        <label for="quantidade">Quantidade</label>
+        <br>
+        <input type="number" id="quantidade" name="quantidade" value="{{pedido.quantidade}}" required>
+        <br><br>
+
+        <label for="categoria">Categoria</label>
+<br>
+<input type="text" id="categoria" name="categoria" value="{{pedido.categoria}}" required>
+<br><br>
+
+<label for="marca">Marca</label>
+<br>
+<input type="text" id="marca" name="marca" value="{{pedido.marca}}" required>
+<br><br>
+
+        <button type="submit">Atualizar Pedido</button>
+    </form>
+
     <br>
-    <input
-        type="text"
-        id="setor"
-        name="setor"
-        value="{{pedido.setor}}"
-        required
-    >
+    <a href="/pedidos">Cancelar</a>
 
-    <br><br>
-
-    <label for="material">Material</label>
-    <br>
-    <input
-        type="text"
-        id="material"
-        name="material"
-        value="{{pedido.material}}"
-        required
-    >
-
-    <br><br>
-
-    <label for="quantidade">Quantidade</label>
-    <br>
-    <input
-        type="number"
-        id="quantidade"
-        name="quantidade"
-        value="{{pedido.quantidade}}"
-        required
-    >
-
-    <br><br>
-
-    <button type="submit">
-        Atualizar Pedido
-    </button>
-
-</form>
+</body>
+</html>

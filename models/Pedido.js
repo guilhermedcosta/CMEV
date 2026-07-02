@@ -1,31 +1,30 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/conn');
+const db = require('../config/conn');
 
-const Pedido = sequelize.define('Pedido', {
-
+const Pedido = db.define('Pedido', {
     cod_item: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
-
     setor: {
         type: DataTypes.STRING,
         allowNull: false
     },
-
     material: {
         type: DataTypes.STRING,
         allowNull: false
     },
-
     quantidade: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER, 
         allowNull: false
+    },
+    categoria: {
+        type: DataTypes.STRING
+    },
+    marca: {
+        type: DataTypes.STRING  
     }
-
-}, {
-    timestamps: false
 });
 
 module.exports = Pedido;

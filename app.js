@@ -31,9 +31,8 @@ app.get('/', (req, res) => {
 });
 
 // Conexão com o banco e inicialização do servidor
-conn
-conn.sync({ force: true })
-.then(() => {
+conn.sync({ alter: true })
+  .then(() => {
     app.listen(3000, () => {
       console.log('Servidor rodando em http://localhost:3000');
     });
