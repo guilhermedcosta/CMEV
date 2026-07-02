@@ -3,7 +3,7 @@ const router = express.Router();
 
 const controller = require("../controllers/usuarioController");
 
-router.get("/", controller.cadastro);
+router.get("/cadastro", controller.cadastro);
 
 router.post("/salvar", controller.salvar);
 
