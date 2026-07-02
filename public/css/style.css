@@ -289,6 +289,7 @@ hr {
  
 body > a[href="/cadastro"],
 body > a[href="/produtos"],
+body > a[href="/pedidos"],
 body > a[href=""] {
   display: block;
   max-width: 960px;
@@ -306,6 +307,7 @@ body > a[href=""] {
  
 body > a[href="/cadastro"]:hover,
 body > a[href="/produtos"]:hover,
+body > a[href="/pedidos"]:hover,
 body > a[href=""]:hover {
   box-shadow: var(--shadow-lg);
   transform: translateY(-1px);
