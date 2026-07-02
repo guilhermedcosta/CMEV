@@ -21,6 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
+app.get('/', (req,res) => {
+    res.render('home')
+})
 // Rotas
 app.use('/', require('./routes/usuarioRoutes'));
 app.use('/', require('./routes/EstoqueRoutes'));
