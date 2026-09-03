@@ -27,6 +27,7 @@ app.get('/', (req,res) => {
 // Rotas
 app.use('/', require('./routes/usuarioRoutes'));
 app.use('/', require('./routes/EstoqueRoutes'));
+app.use('/', require('./routes/pedidoRoutes'));
 
 // Conexão + inicialização
 sequelize.sync()

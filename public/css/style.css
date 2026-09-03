@@ -1,0 +1,323 @@
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --border: #e2e5ea;
+  --text: #1f2430;
+  --text-muted: #6b7280;
+  --primary: #3d5af1;
+  --primary-dark: #2c41c9;
+  --danger: #e5484d;
+  --danger-dark: #c53137;
+  --success: #12876f;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 8px 24px rgba(16, 24, 40, 0.10);
+}
+ 
+* {
+  box-sizing: border-box;
+}
+ 
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+ 
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+}
+ 
+header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+ 
+body > h1 {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  margin: 0;
+  padding: 24px 32px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+ 
+main {
+  max-width: 960px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+ 
+main h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0;
+  color: var(--text);
+}
+ 
+main h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 0;
+}
+ 
+main p {
+  color: var(--text-muted);
+  max-width: 70ch;
+}
+ 
+main ul {
+  padding-left: 20px;
+  color: var(--text);
+}
+ 
+main ul li {
+  margin-bottom: 4px;
+}
+ 
+main > div {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 32px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+ 
+body > form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 32px;
+  max-width: 400px;
+  margin: 48px auto;
+}
+ 
+body > form + a {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 48px;
+}
+ 
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  margin-top: 16px;
+}
+ 
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fbfbfd;
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+ 
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(61, 90, 241, 0.15);
+  background: #fff;
+}
+ 
+form > div {
+  margin-bottom: 4px;
+}
+ 
+form > div > div {
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
+}
+ 
+form > div > div:first-child {
+  margin-right: 4%;
+}
+ 
+button,
+a[href] {
+  font-family: inherit;
+}
+ 
+button {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 11px 22px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+ 
+button:hover {
+  background: var(--primary-dark);
+}
+ 
+button:active {
+  transform: translateY(1px);
+}
+ 
+form > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+ 
+form > div:last-child a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+ 
+form > div:last-child a:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+ 
+main > a[href^="/produtos/novo"] {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+ 
+main > a[href^="/produtos/novo"]:hover {
+  background: var(--primary-dark);
+}
+ 
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+ 
+a:hover {
+  text-decoration: underline;
+}
+ 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+ 
+thead {
+  background: #eef0f6;
+}
+ 
+th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+ 
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+  color: var(--text);
+}
+ 
+tbody tr:last-child td {
+  border-bottom: none;
+}
+ 
+tbody tr:hover {
+  background: #f8f9fc;
+}
+ 
+td a {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-right: 12px;
+}
+ 
+td a[href*="excluir"],
+td a[href*="deletar"] {
+  color: var(--danger);
+}
+ 
+td a[href*="excluir"]:hover,
+td a[href*="deletar"]:hover {
+  color: var(--danger-dark);
+}
+ 
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px auto;
+  max-width: 960px;
+}
+ 
+body > a[href="/cadastro"],
+body > a[href="/produtos"],
+body > a[href="/pedidos"],
+body > a[href=""] {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto 12px auto;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  transition: box-shadow 0.15s ease, transform 0.05s ease;
+}
+ 
+body > a[href="/cadastro"]:hover,
+body > a[href="/produtos"]:hover,
+body > a[href="/pedidos"]:hover,
+body > a[href=""]:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: var(--primary);
+}
+ 
+footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 32px 20px;
+}
