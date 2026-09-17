@@ -3,10 +3,6 @@ const { engine } = require('express-handlebars');
 
 const sequelize = require('./config/database');
 
-// Importa os models para o Sequelize "enxergar" as tabelas no sync()
-const Usuario = require('./models/Usuario');
-// const Produto = require('./models/Produto'); // descomente se existir
-
 const app = express();
 
 // Configuração do Handlebars
