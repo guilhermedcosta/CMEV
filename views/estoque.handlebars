@@ -3,12 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque do Setor</title>
+    <title>Materiais | CMEV</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/estoque.css">
 </head>
 <body>
-    <main>
-        {{{body}}}
-    </main>
+    <div class="catalog-shell">
+        <div class="utility-bar">
+            <a href="/">CMEV</a>
+            <span>Materiais para o seu dia a dia</span>
+        </div>
+
+        <header class="store-header">
+            <a class="store-brand" href="/produtos" aria-label="CMEV, página inicial">
+                <span class="brand-mark" aria-hidden="true">C</span>
+                CMEV
+            </a>
+            <label class="catalog-search">
+                <input id="product-search" type="search" placeholder="Buscar material" aria-label="Buscar material">
+                <span class="search-mark" aria-hidden="true"></span>
+            </label>
+            <button class="header-cart" id="cart-toggle" type="button" aria-expanded="false" aria-controls="cart-panel">
+                <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 3h2l2.2 11.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"></path>
+                    <circle cx="10" cy="20" r="1"></circle>
+                    <circle cx="18" cy="20" r="1"></circle>
+                </svg>
+                <span>Carrinho</span>
+                <span class="cart-count" id="cart-count" aria-live="polite">0</span>
+            </button>
+            <section class="cart-panel" id="cart-panel" aria-labelledby="cart-title" hidden>
+                <div class="cart-heading">
+                    <h2 id="cart-title">Seu carrinho</h2>
+                    <button class="cart-close" id="cart-close" type="button" aria-label="Fechar carrinho">&times;</button>
+                </div>
+                <p class="cart-empty" id="cart-empty">Seu carrinho está vazio.</p>
+                <ul class="cart-items" id="cart-items"></ul>
+                <p class="cart-total" id="cart-total" hidden></p>
+                <button class="cart-clear" id="cart-clear" type="button" hidden>Esvaziar carrinho</button>
+                <p class="cart-status" id="cart-status" role="status" aria-live="polite"></p>
+            </section>
+        </header>
+
+        <nav class="catalog-nav" aria-label="Navegação do estoque">
+            <a href="#catalogo">Itens</a>
+            <a href="/produtos/novo">Cadastrar</a>
+            <a href="#suporte">Suporte</a>
+        </nav>
+
+        <main class="catalog-content" id="catalogo">
+            <div class="catalog-heading">
+                <div>
+                    <h1>Materiais em estoque</h1>
+                    <p>Confira os materiais disponíveis.</p>
+                </div>
+                <a class="add-product" href="/produtos/novo">+ Novo material</a>
+            </div>
+
+            <section class="product-grid" aria-label="Lista de materiais">
+                {{#each produtos}}
+                <article class="product-card" data-search="{{this.nome_produto}} {{this.marca}} {{this.categoria}} {{this.cod_item}}" data-product-id="{{this.id}}" data-product-name="{{this.nome_produto}}" data-product-price="{{this.preco}}" data-product-stock="{{this.quantidade_atual}}">
+                    <div class="product-thumb" aria-hidden="true">{{this.categoria}}</div>
+                    <div class="product-info">
+                        <h2>{{this.nome_produto}}</h2>
+                        <p class="product-detail">{{this.marca}} | {{this.categoria}}</p>
+                        <p class="product-detail product-code">Cód.: {{this.cod_item}} · Estoque: {{this.quantidade_atual}}</p>
+                        <p class="product-price">R$ {{this.preco}}</p>
+                        <div class="product-actions">
+                            <a href="/produtos/editar/{{this.id}}">Editar</a>
+                            <a href="/produtos/excluir/{{this.id}}" onclick="return confirm('Deseja excluir este item?')">Excluir</a>
+                        </div>
+                        <button class="cart-add" type="button">Adicionar ao carrinho</button>
+                    </div>
+                </article>
+                {{else}}
+                <p class="empty-state">Nenhum material cadastrado no estoque.</p>
+                {{/each}}
+            </section>
+            <a class="more-link" href="/produtos/novo">Mais itens +</a>
+        </main>
+    </div>
+    <script>
+        const searchInput = document.querySelector('#product-search');
+        const productCards = [...document.querySelectorAll('.product-card')];
+        const cartToggle = document.querySelector('#cart-toggle');
+        const cartPanel = document.querySelector('#cart-panel');
+        const cartItemsList = document.querySelector('#cart-items');
+        const cartCount = document.querySelector('#cart-count');
+        const cartEmpty = document.querySelector('#cart-empty');
+        const cartTotal = document.querySelector('#cart-total');
+        const cartClear = document.querySelector('#cart-clear');
+        const cartStatus = document.querySelector('#cart-status');
+        const cartStorageKey = 'cmev-stock-cart';
+        const productsById = new Map(productCards.map((card) => [card.dataset.productId, card]));
+        const cart = new Map();
+        const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        function showCartStatus(message) {
+            cartStatus.textContent = message;
+        }
+
+        function readSavedCart() {
+            const savedCart = localStorage.getItem(cartStorageKey);
+
+            if (!savedCart) return [];
+
+            try {
+                const items = JSON.parse(savedCart);
+                if (!Array.isArray(items)) throw new SyntaxError('Formato do carrinho inválido.');
+                return items;
+            } catch (error) {
+                if (!(error instanceof SyntaxError)) throw error;
+                showCartStatus('Não foi possível recuperar o carrinho salvo. Adicione os produtos novamente.');
+                return [];
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem(cartStorageKey, JSON.stringify([...cart.values()]));
+        }
+
+        function renderCart() {
+            cartItemsList.replaceChildren();
+            let itemCount = 0;
+            let total = 0;
+
+            cart.forEach((item) => {
+                itemCount += item.quantity;
+                total += item.price * item.quantity;
+
+                const row = document.createElement('li');
+                row.className = 'cart-item';
+
+                const details = document.createElement('div');
+                details.className = 'cart-item-details';
+
+                const name = document.createElement('span');
+                name.className = 'cart-item-name';
+                name.textContent = item.name;
+
+                const price = document.createElement('span');
+                price.className = 'cart-item-price';
+                price.textContent = currency.format(item.price);
+                details.append(name, price);
+
+                const controls = document.createElement('div');
+                controls.className = 'cart-quantity';
+
+                const decrease = document.createElement('button');
+                decrease.type = 'button';
+                decrease.dataset.cartAction = 'decrease';
+                decrease.dataset.productId = item.id;
+                decrease.setAttribute('aria-label', `Diminuir quantidade de ${item.name}`);
+                decrease.textContent = '-';
+
+                const quantity = document.createElement('span');
+                quantity.textContent = item.quantity;
+
+                const increase = document.createElement('button');
+                increase.type = 'button';
+                increase.dataset.cartAction = 'increase';
+                increase.dataset.productId = item.id;
+                increase.setAttribute('aria-label', `Aumentar quantidade de ${item.name}`);
+                increase.textContent = '+';
+                increase.disabled = item.quantity >= item.stock;
+
+                controls.append(decrease, quantity, increase);
+                row.append(details, controls);
+                cartItemsList.append(row);
+            });
+
+            cartCount.textContent = itemCount;
+            cartEmpty.hidden = cart.size > 0;
+            cartTotal.hidden = cart.size === 0;
+            cartClear.hidden = cart.size === 0;
+            cartTotal.textContent = `Total: ${currency.format(total)}`;
+            productCards.forEach((card) => {
+                const addButton = card.querySelector('.cart-add');
+                const stock = Number(card.dataset.productStock);
+                const item = cart.get(card.dataset.productId);
+                addButton.disabled = !Number.isFinite(stock) || stock <= 0 || Boolean(item && item.quantity >= stock);
+                addButton.textContent = !Number.isFinite(stock) || stock <= 0 ? 'Sem estoque' : 'Adicionar ao carrinho';
+            });
+        }
+
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.trim().toLocaleLowerCase('pt-BR');
+
+            productCards.forEach((card) => {
+                card.hidden = !card.dataset.search.toLocaleLowerCase('pt-BR').includes(searchTerm);
+            });
+        });
+
+        readSavedCart().forEach((item) => {
+            if (!item || typeof item !== 'object') return;
+
+            const card = productsById.get(String(item.id));
+            if (!card) return;
+
+            const stock = Number(card.dataset.productStock);
+            const price = Number(card.dataset.productPrice);
+            const savedQuantity = Number(item.quantity);
+            const quantity = Math.min(savedQuantity, stock);
+            if (!Number.isFinite(savedQuantity) || !Number.isInteger(savedQuantity)) return;
+            if (stock <= 0 || !Number.isFinite(price) || !Number.isInteger(quantity) || quantity < 1) return;
+
+            cart.set(String(item.id), {
+                id: String(item.id),
+                name: card.dataset.productName,
+                price,
+                quantity,
+                stock
+            });
+        });
+        saveCart();
+        renderCart();
+
+        cartToggle.addEventListener('click', () => {
+            cartPanel.hidden = !cartPanel.hidden;
+            cartToggle.setAttribute('aria-expanded', String(!cartPanel.hidden));
+        });
+
+        document.querySelector('#cart-close').addEventListener('click', () => {
+            cartPanel.hidden = true;
+            cartToggle.setAttribute('aria-expanded', 'false');
+            cartToggle.focus();
+        });
+
+        document.querySelector('.product-grid').addEventListener('click', (event) => {
+            const addButton = event.target.closest('.cart-add');
+            if (!addButton) return;
+
+            const card = addButton.closest('.product-card');
+            const id = card.dataset.productId;
+            const stock = Number(card.dataset.productStock);
+            const existing = cart.get(id);
+
+            if (existing && existing.quantity >= stock) {
+                showCartStatus('A quantidade disponível deste material já está no carrinho.');
+                return;
+            }
+
+            cart.set(id, {
+                id,
+                name: card.dataset.productName,
+                price: Number(card.dataset.productPrice),
+                quantity: existing ? existing.quantity + 1 : 1,
+                stock
+            });
+            showCartStatus(`${card.dataset.productName} adicionado ao carrinho.`);
+            saveCart();
+            renderCart();
+        });
+
+        cartItemsList.addEventListener('click', (event) => {
+            const control = event.target.closest('[data-cart-action]');
+            if (!control) return;
+
+            const item = cart.get(control.dataset.productId);
+            if (!item) return;
+
+            if (control.dataset.cartAction === 'increase' && item.quantity < item.stock) {
+                item.quantity += 1;
+            } else if (control.dataset.cartAction === 'decrease') {
+                item.quantity -= 1;
+                if (item.quantity === 0) cart.delete(item.id);
+            }
+
+            showCartStatus('');
+            saveCart();
+            renderCart();
+        });
+
+        cartClear.addEventListener('click', () => {
+            cart.clear();
+            showCartStatus('Carrinho esvaziado.');
+            saveCart();
+            renderCart();
+        });
+    </script>
 </body>
 </html>
