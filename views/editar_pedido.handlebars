@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pedido</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <main>
+        <h1>Editar Pedido de Requisição</h1>
+        <form action="/pedidos/atualizar" method="POST">
+            <input type="hidden" name="id" value="{{pedido.id}}">
+            <div>
+                <label>Código do Item</label><br>
+                <input type="text" name="cod_item" value="{{pedido.cod_item}}" required>
+            </div>
+            <div>
+                <label>Setor</label><br>
+                <input type="text" name="setor" value="{{pedido.setor}}" required>
+            </div>
+            <div>
+                <label>Material</label><br>
+                <input type="text" name="material" value="{{pedido.material}}" required>
+            </div>
+            <div>
+                <label>Quantidade</label><br>
+                <input type="number" name="quantidade" min="1" value="{{pedido.quantidade}}" required>
+            </div>
+            <div>
+                <label>Categoria</label><br>
+                <input type="text" name="categoria" value="{{pedido.categoria}}" required>
+            </div>
+            <div>
+                <label>Marca</label><br>
+                <input type="text" name="marca" value="{{pedido.marca}}" required>
+            </div>
+            <br>
+            <a href="/pedidos">Voltar</a>
+            <button type="submit">Atualizar Pedido</button>
+        </form>
+    </main>
+</body>
+</html>
