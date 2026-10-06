@@ -5,7 +5,7 @@ const Produto = require('../models/produtos');
 
 router.get('/produtos', async (req, res) => {
     const produtos = await Produto.findAll();
-    res.render('cadastrar_estoque', { produtos: produtos.map(p => p.get({ plain: true })) });
+    res.render('estoque', { produtos: produtos.map(p => p.get({ plain: true })) });
 });
 
 
