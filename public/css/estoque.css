@@ -379,6 +379,12 @@ body {
     text-transform: uppercase;
 }
 
+.product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .product-info {
     min-width: 0;
 }

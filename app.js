@@ -23,7 +23,7 @@ app.use('/', require('./routes/EstoqueRoutes'));
 app.use('/', require('./routes/pedidoRoutes'));
 
 // Conexão + inicialização
-sequelize.sync()
+sequelize.sync({ alter: true })
     .then(() => {
         app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
     })

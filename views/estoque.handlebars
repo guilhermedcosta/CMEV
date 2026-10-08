@@ -63,7 +63,13 @@
             <section class="product-grid" aria-label="Lista de materiais">
                 {{#each produtos}}
                 <article class="product-card" data-search="{{this.nome_produto}} {{this.marca}} {{this.categoria}} {{this.cod_item}}" data-product-id="{{this.id}}" data-product-name="{{this.nome_produto}}" data-product-price="{{this.preco}}" data-product-stock="{{this.quantidade_atual}}">
-                    <div class="product-thumb" aria-hidden="true">{{this.categoria}}</div>
+                    <div class="product-thumb">
+                        {{#if this.foto_url}}
+                        <img src="{{this.foto_url}}" alt="Foto de {{this.nome_produto}}" loading="lazy">
+                        {{else}}
+                        <span>Sem foto</span>
+                        {{/if}}
+                    </div>
                     <div class="product-info">
                         <h2>{{this.nome_produto}}</h2>
                         <p class="product-detail">{{this.marca}} | {{this.categoria}}</p>
