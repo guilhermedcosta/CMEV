@@ -11,13 +11,13 @@
 
 <form action="/salvar" method="POST">
 
-    <label>CPF</label><br>
-    <input type="text" name="cpf"  placeholder="Ex: 123.456.789-10" maxlength="14" minlength="14"><br><br>
+    <label for="cpf">CPF</label><br>
+    <input id="cpf" type="text" name="cpf" placeholder="Ex: 123.456.789-10" maxlength="14" minlength="14" required><br><br>
 
-    <label>Senha</label><br>
-    <input type="password" name="senha" minlength="6" maxlength="15"><br><br>
+    <label for="senha">Senha</label><br>
+    <input id="senha" type="password" name="senha" minlength="6" maxlength="15" required><br><br>
 
-    <button>Cadastrar</button>
+    <button type="submit">Cadastrar</button>
 
 </form>
 

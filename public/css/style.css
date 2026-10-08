@@ -2,6 +2,7 @@
   --bg: #f4f5f7;
   --surface: #ffffff;
   --border: #e2e5ea;
+  --input-border: #767676;
   --text: #1f2430;
   --text-muted: #6b7280;
   --primary: #3d5af1;
@@ -123,7 +124,7 @@ input[type="password"],
 input[type="number"] {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--input-border);
   border-radius: 6px;
   font-size: 0.95rem;
   background: #fbfbfd;
