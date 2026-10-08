@@ -13,13 +13,13 @@
 
 <input type="hidden" name="id" value="{{usuario.id}}">
 
-<label>CPF</label><br>
-<input type="text" name="cpf" value="{{usuario.cpf}}" placeholder="Ex: 123.456.789-10" maxlength="14" minlength="14"><br><br>
+<label for="cpf">CPF</label><br>
+<input id="cpf" type="text" name="cpf" value="{{usuario.cpf}}" placeholder="Ex: 123.456.789-10" maxlength="14" minlength="14" required><br><br>
 
-<label>Senha</label><br>
-<input type="password" name="senha" value="{{usuario.senha}}" maxlength="15" minlength="6"><br><br>
+<label for="senha">Senha</label><br>
+<input id="senha" type="password" name="senha" value="{{usuario.senha}}" maxlength="15" minlength="6" required><br><br>
 
-<button>Salvar</button>
+<button type="submit">Salvar</button>
 
 </form>
 </body>
