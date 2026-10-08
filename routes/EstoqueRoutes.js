@@ -16,7 +16,10 @@ router.get('/produtos/novo', (req, res) => {
 
 router.post('/produtos/criar', async (req, res) => {
     try {
-        await Produto.create(req.body);
+        await Produto.create({
+            ...req.body,
+            foto_url: req.body.foto_url || null
+        });
         res.redirect('/produtos');
     } catch (err) {
         console.error('Erro ao criar produto:', err);
@@ -35,8 +38,26 @@ router.get('/produtos/editar/:id', async (req, res) => {
 
 
 router.post('/produtos/atualizar', async (req, res) => {
-    await Produto.update(req.body, { where: { id: req.body.id } });
-    res.redirect('/produtos');
+    try {
+        const dadosAtualizacao = {
+            cod_item: req.body.cod_item,
+            nome_produto: req.body.nome_produto,
+            marca: req.body.marca,
+            categoria: req.body.categoria,
+            quantidade_atual: req.body.quantidade_atual,
+            preco: req.body.preco
+        };
+
+        if (req.body.foto_url !== undefined) {
+            dadosAtualizacao.foto_url = req.body.foto_url || null;
+        }
+
+        await Produto.update(dadosAtualizacao, { where: { id: req.body.id } });
+        res.redirect('/produtos');
+    } catch (err) {
+        console.error('Erro ao atualizar produto:', err);
+        res.redirect(`/produtos/editar/${req.body.id}`);
+    }
 });
 
 

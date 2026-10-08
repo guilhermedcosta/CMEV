@@ -28,6 +28,10 @@ const Produto = sequelize.define('Produto', {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
         defaultValue: 0.00
+    },
+    foto_url: {
+        type: DataTypes.STRING,
+        allowNull: true
     }   
 });     
 
