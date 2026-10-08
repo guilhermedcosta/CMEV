@@ -1,0 +1,43 @@
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | Orion Design</title>
+    <link rel="stylesheet" href="/css/usuario.css">
+</head>
+<body>
+    <div class="page-shell">
+        <section class="login-panel">
+            <div class="login-card">
+                <h1>Entrar</h1>
+
+                <form action="/login" method="POST" class="login-form">
+                    <label for="cpf">CPF</label>
+                    <input id="cpf" type="text" name="cpf" maxlength="14" placeholder="Digite seu CPF" required>
+
+                    <label for="senha">Senha</label>
+                    <input id="senha" type="password" name="senha" maxlength="15" placeholder="Digite sua senha" required>
+
+                    <button type="submit">Enviar</button>
+
+                    {{#if error}}
+                        <p class="login-error">{{error}}</p>
+                    {{/if}}
+
+                    <p class="helper-text">
+                        Seu nome de perfil no CMEV será salvo.<br>
+                        Sair do processo? <a href="/cadastro">Crie uma conta</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        <aside class="brand-panel" aria-label="Marca Orion Design">
+            <img class="brand-logo" src="/images/orion-logo.png" alt="Orion Design">
+        </aside>
+    </div>
+
+    <div class="info-badge" aria-label="Informações do sistema">i</div>
+</body>
+</html>

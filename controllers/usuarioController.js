@@ -2,6 +2,30 @@ const Usuario = require("../models/Usuario");
 
 module.exports = {
 
+    login(req, res) {
+        res.render("usuario", { error: null });
+    },
+
+    async autenticar(req, res) {
+        const cpf = String(req.body.cpf || "").trim();
+        const senha = String(req.body.senha || "").trim();
+
+        if (!cpf || !senha) {
+            return res.render("usuario", { error: "CPF e senha são obrigatórios." });
+        }
+
+        const usuario = await Usuario.findOne({
+            where: { cpf },
+            raw: true
+        });
+
+        if (!usuario || usuario.senha !== senha) {
+            return res.render("usuario", { error: "CPF ou senha inválidos." });
+        }
+
+        return res.redirect("/produtos");
+    },
+
     cadastro(req, res){
         res.render("cadastroUsuario");
     },
